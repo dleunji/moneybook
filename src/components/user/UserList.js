@@ -47,7 +47,7 @@ const FinishButton = styled.button`
   margin: 0 0.2rem;
 `;
 
-const UserList = ({ userList, user, onChange }) => {
+const UserList = ({ userList, user, onChange, onDelete, open,  handleDeleteOpen, handleClose  }) => {
   return (
     <div>
       <HeaderBlock>
@@ -62,7 +62,15 @@ const UserList = ({ userList, user, onChange }) => {
         </div>
       </HeaderBlock>
       <BodyBlock>
-        <UserItemList users={userList} user={user} onChange={onChange}/>
+        <UserItemList
+          users={userList}
+          user={user}
+          onChange={onChange}
+          onDelete={onDelete}
+          open={open}
+          handleClose={handleClose}
+          handleDeleteOpen={handleDeleteOpen}
+        />
       </BodyBlock>
       <FooterBlock>
         <Link to="/">

@@ -6,6 +6,14 @@ import {
   faPenToSquare,
   faTrashCan,
 } from '@fortawesome/free-solid-svg-icons/index';
+// import DeleteDialog from './DeleteDialog';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
 const Item = styled.div`
   height: 4rem;
   display: flex;
@@ -24,20 +32,21 @@ const Item = styled.div`
     width: 3rem;
     font-size: 
     padding-left: 0.8rem;
+    cursor: pointer;
   }
 `;
 
-const UserItem = ({ user, checked, onChange }) => {
+const UserItem = ({ item, checked, onChange, onDelete }) => {
   return (
     <Item>
       <span className="username">
-        {user.userLastName}
-        {user.userFirstName}
+        {item.userLastName}
+        {item.userFirstName}
       </span>
       <div className="options">
-        {checked ? null : <FontAwesomeIcon className="icon" icon={faCheck} onClick={() => onChange(user)}/>}
-        <FontAwesomeIcon className="icon" icon={faPenToSquare} />
-        <FontAwesomeIcon className="icon" icon={faTrashCan} />
+        {checked ? null : <FontAwesomeIcon className="icon" icon={faCheck} onClick={() => onChange(item)}/>}
+        {/* <FontAwesomeIcon className="icon" icon={faPenToSquare} /> */}
+        <FontAwesomeIcon className="icon" icon={faTrashCan} onClick={()=> onDelete(item.userId)}/>
       </div>
     </Item>
   );

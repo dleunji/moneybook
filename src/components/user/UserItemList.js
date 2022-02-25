@@ -14,11 +14,17 @@ const List = styled.div`
   overflow-y: auto;
 `;
 
-const UserItemList = ({ users, user, onChange }) => {
+const UserItemList = ({ users, user, onChange, onDelete }) => {
   return (
     <List>
-      {users.map((u) => (
-        <UserItem user={u} key={u.userId} checked={user != null && u.userId == user.userId} onChange={onChange}/>
+      {users.map((item, idx) => (
+        <UserItem
+          item={item}
+          key={idx}
+          checked={user != null && item.userId == user.userId}
+          onChange={onChange}
+          onDelete={onDelete}
+        />
       ))}
     </List>
   );
