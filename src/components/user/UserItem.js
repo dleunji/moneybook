@@ -5,7 +5,7 @@ import {
   faCheck,
   faPenToSquare,
   faTrashCan,
-} from '../../../node_modules/@fortawesome/free-solid-svg-icons/index';
+} from '@fortawesome/free-solid-svg-icons/index';
 const Item = styled.div`
   height: 4rem;
   display: flex;
@@ -25,18 +25,6 @@ const Item = styled.div`
     font-size: 
     padding-left: 0.8rem;
   }
-`;
-
-const OptionButton = styled.button`
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  padding: 0.25rem;
-  outline: none;
-  cursor: pointer;
-  color: white;
-  background: #a9b8ce;
-  margin: 0 0.2rem;
 `;
 
 const UserItem = ({ user, checked, onChange }) => {

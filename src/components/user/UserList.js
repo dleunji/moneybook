@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Responsive from '../common/Responsive';
+import { Link } from 'react-router-dom';
 import UserItemList from './UserItemList';
 
 const HeaderBlock = styled.div`
@@ -31,6 +31,20 @@ const BodyBlock = styled.div`
 const FooterBlock = styled.div`
   display: flex;
   justify-content: center;
+  margin-top: 1rem;
+`;
+
+const FinishButton = styled.button`
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: 'Noto Sans Serif KR';
+  padding: 0.8rem 1rem;
+  outline: none;
+  cursor: pointer;
+  color: white;
+  background: black;
+  margin: 0 0.2rem;
 `;
 
 const UserList = ({ userList, user, onChange }) => {
@@ -50,7 +64,11 @@ const UserList = ({ userList, user, onChange }) => {
       <BodyBlock>
         <UserItemList users={userList} user={user} onChange={onChange}/>
       </BodyBlock>
-      <FooterBlock>완료</FooterBlock>
+      <FooterBlock>
+        <Link to="/">
+          <FinishButton>완료</FinishButton>
+        </Link>
+      </FooterBlock>
     </div>
   );
 };

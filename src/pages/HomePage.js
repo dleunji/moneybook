@@ -1,12 +1,7 @@
 import React from 'react';
-import Header from '../components/Header';
+import HomeContainer from '../containers/home/HomeContainer';
 const HomePage = () => {
-  return (
-    <div>
-      <Header/>
-      부자가 되자~
-    </div>
-  );
+  return <HomeContainer/>;
 }
 
 export default HomePage;

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Responsive from './common/Responsive';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index';
-import { faUserGroup } from '@fortawesome/free-solid-svg-icons/index';
+import { faBars } from '@fortawesome/free-solid-svg-icons/index';
 import { Link } from 'react-router-dom';
 
 const HeaderBlock = styled.div`
@@ -18,11 +18,11 @@ const Wrapper = styled(Responsive)`
   justify-content: space-between;
   .left {
     font-size: 1.125rem;
-    letter-spacing: 2px;
+    font-family: 'Noto Sans Serif KR';
   }
   .right {
     display: flex;
-    color: gray;
+    color: black;
     text-decoration-line: none;
     border: none;
     cursor: pointer;
@@ -42,17 +42,16 @@ const Wrapper = styled(Responsive)`
 const Spacer = styled.div`
   height: 4rem;
 `;
-const Header = () => {
+const Header = ({user}) => {
   return (
     <>
       <HeaderBlock>
         <Wrapper>
           <div className="left">
-            (&nbsp;<span className="username">? </span>&nbsp;)의 용돈 기입장
+            (&nbsp;<span className="username"> {user == null ? '?' : user.userFirstName} </span>&nbsp;)의 용돈 기입장
           </div>
           <Link to="/users" className="right">
-            <FontAwesomeIcon icon={faUserGroup} />
-            <span>Accounts</span>
+            <FontAwesomeIcon icon={faBars} />
           </Link>
         </Wrapper>
       </HeaderBlock>
