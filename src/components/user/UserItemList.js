@@ -1,6 +1,7 @@
 import React from 'react';
 import UserItem from './UserItem';
 import styled from 'styled-components';
+import ExtraUser from './ExtraUser';
 const List = styled.div`
   background-image: linear-gradient(
       rgba(255, 255, 255, 0.8),
@@ -14,18 +15,26 @@ const List = styled.div`
   overflow-y: auto;
 `;
 
-const UserItemList = ({ users, user, onChange, onDelete }) => {
+const UserItemList = ({ users, user, onChange, onDelete, open, handleAddOpen, handleClose, saveClose, newUser, handleTextField }) => {
   return (
     <List>
       {users.map((item, idx) => (
         <UserItem
           item={item}
           key={idx}
-          checked={user != null && item.userId == user.userId}
+          checked={user != null && item.userId === user.userId}
           onChange={onChange}
           onDelete={onDelete}
         />
       ))}
+      <ExtraUser
+        open={open}
+        handleAddOpen={handleAddOpen}
+        handleClose={handleClose}
+        saveClose={saveClose}
+        newUser={newUser}
+        handleTextField={handleTextField}
+      />
     </List>
   );
 };

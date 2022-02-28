@@ -3,16 +3,10 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index';
 import {
   faCheck,
-  faPenToSquare,
+  faCircleInfo,
   faTrashCan,
 } from '@fortawesome/free-solid-svg-icons/index';
-// import DeleteDialog from './DeleteDialog';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import { faCirclePlus } from '../../../node_modules/@fortawesome/free-solid-svg-icons/index';
 
 const Item = styled.div`
   height: 4rem;
@@ -30,7 +24,6 @@ const Item = styled.div`
   }
   .icon {
     width: 3rem;
-    font-size: 
     padding-left: 0.8rem;
     cursor: pointer;
   }
@@ -45,7 +38,7 @@ const UserItem = ({ item, checked, onChange, onDelete }) => {
       </span>
       <div className="options">
         {checked ? null : <FontAwesomeIcon className="icon" icon={faCheck} onClick={() => onChange(item)}/>}
-        {/* <FontAwesomeIcon className="icon" icon={faPenToSquare} /> */}
+        <FontAwesomeIcon className="icon" icon={faCircleInfo} />
         <FontAwesomeIcon className="icon" icon={faTrashCan} onClick={()=> onDelete(item.userId)}/>
       </div>
     </Item>

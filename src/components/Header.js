@@ -17,7 +17,7 @@ const Wrapper = styled(Responsive)`
   align-items: center;
   justify-content: space-between;
   .left {
-    font-size: 1.125rem;
+    font-size: 1.4rem;
     font-family: 'Noto Sans Serif KR';
   }
   .right {
@@ -28,9 +28,20 @@ const Wrapper = styled(Responsive)`
     cursor: pointer;
     align-items: center;
     font-size: 1.4rem;
-    span {
-      padding-left: 0.3rem;
-      font-size: 1rem;
+    a {
+      color: inherit;
+    }
+    .nav-bar {
+      font-size: 0.8em;
+      display: flex;
+      width: 10rem;
+      justify-content: space-between;
+      margin-right: 2rem;
+      .active {
+        display:inline;
+        cursor: default;
+        color: #1976d2;
+      }
     }
   }
   .username {
@@ -42,17 +53,41 @@ const Wrapper = styled(Responsive)`
 const Spacer = styled.div`
   height: 4rem;
 `;
-const Header = ({user}) => {
+const tabs = ['기입', '내역', '통계'];
+
+const Header = ({ user, onChangeTab, navTab }) => {
   return (
     <>
       <HeaderBlock>
         <Wrapper>
           <div className="left">
-            (&nbsp;<span className="username"> {user == null ? '?' : user.userFirstName} </span>&nbsp;)의 용돈 기입장
+            (&nbsp;
+            <span className="username">
+              {' '}
+              {user == null ? '?' : user.userFirstName}{' '}
+            </span>
+            &nbsp;)의 용돈 기입장
           </div>
-          <Link to="/users" className="right">
-            <FontAwesomeIcon icon={faBars} />
-          </Link>
+          <div className="right">
+            <div>
+              {user && (
+                <div className="nav-bar">
+                  {tabs.map((tab, idx) => (
+                    <div
+                      className={navTab === idx ? 'active' : ''}
+                      onClick={() => onChangeTab(idx)}
+                      key={idx}
+                    >
+                      {tab}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            <Link to="/users">
+              <FontAwesomeIcon icon={faBars} />
+            </Link>
+          </div>
         </Wrapper>
       </HeaderBlock>
       <Spacer />

@@ -2,14 +2,15 @@ import React from 'react';
 import UserList from '../../components/user/UserList';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeUser, deleteUser } from '../../modules/auth';
+import { changeUser, createUser, deleteUser, changeField, initialNewUser} from '../../modules/auth';
 
 const UserListContainer = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const { userList, user } = useSelector(({ auth }) => ({
+  const { userList, user, newUser } = useSelector(({ auth }) => ({
     userList: auth.userList,
     user: auth.currentUser,
+    newUser: auth.newUser
   }));
 
   const onChange = (user) => {
@@ -19,7 +20,7 @@ const UserListContainer = () => {
   };
 
   const onDelete = (userId) => {
-    if(user != null && userId == user.userId){
+    if(user != null && userId === user.userId){
       dispatch(changeUser(null));
     }
     dispatch(
@@ -28,12 +29,29 @@ const UserListContainer = () => {
     setOpen(false);
   };
 
-  const handleDeleteOpen = () => {
+  const handleAddOpen = () => {
     setOpen(true);
   }
 
   const handleClose = () => {
     setOpen(false);
+  }
+
+  const saveClose = () => {
+    console.log(newUser);
+    dispatch(createUser(newUser));
+    dispatch(initialNewUser());
+    setOpen(false);
+  }
+
+  const handleTextField = (e) => {
+    const {name, value} = e.target;
+    console.log(name,value);
+    dispatch(
+      changeField({
+        name, value
+      })
+    );
   }
 
   return (
@@ -43,8 +61,11 @@ const UserListContainer = () => {
       onChange={onChange}
       onDelete={onDelete}
       open={open}
-      handleDeleteOpen={handleDeleteOpen}
+      handleAddOpen={handleAddOpen}
       handleClose={handleClose}
+      saveClose={saveClose}
+      newUser={newUser}
+      handleTextField={handleTextField}
     />
   );
 };
