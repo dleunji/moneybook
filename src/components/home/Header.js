@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Responsive from './common/Responsive';
+import Responsive from '../common/Responsive';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index';
 import { faBars } from '@fortawesome/free-solid-svg-icons/index';
 import { Link } from 'react-router-dom';
@@ -53,7 +53,7 @@ const Wrapper = styled(Responsive)`
 const Spacer = styled.div`
   height: 4rem;
 `;
-const tabs = ['기입', '내역', '통계'];
+const tabs = ['내역', '기입', '통계'];
 
 const Header = ({ user, onChangeTab, navTab }) => {
   return (

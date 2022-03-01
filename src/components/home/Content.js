@@ -1,18 +1,35 @@
 import React from 'react';
-import Responsive from './common/Responsive';
+import Responsive from '../common/Responsive';
 import styled from 'styled-components';
 import { Box, Stepper, Step, StepLabel, Typography, Button } from '@mui/material/index';
-import CashInput from './entry/CashIn';
-
-const steps = ['유형 선택', '내용 입력', '기입 완료'];
+import CashInput from '../entry/CashIn';
+import CustomStepper from '../entry/CustomStepper';
+const steps = ['유형 선택', '내용 입력'];
 
 const ContentBlock = styled(Responsive)`
   padding-top: 2rem;
   padding-bottom: 2rem;
   display: flex;
   justify-content: center;
+  .content-stepper {
+    margin-bottom: 3rem;
+  }
+  .content-box {
+    margin-top: 3rem;
+    .content-stepper {
+      height: 20rem;
+    }
+    .step-options {
+      display: flex;
+      flex-direction: column;
+    }
+    .cash-in {
+      align-items: center;
+    }
+  }
 `;
-const Content = ({ handleNext, handleBack, handleReset, activeStep}) => {
+
+const Content = ({ handleNext, handleBack, handleReset, activeStep, onChangeOption, activeOption, onChangeEntry, entry }) => {
   return (
     <ContentBlock>
       <Box sx={{ width: '90%' }}>
@@ -26,20 +43,26 @@ const Content = ({ handleNext, handleBack, handleReset, activeStep}) => {
           })}
         </Stepper>
         {activeStep === steps.length ? (
-          <>
+          <div className="content-box">
             <Typography sx={{mt: 2, mb: 1}}>
               All steps completed - you&apos;re finished
             </Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'row', pt:2 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'row', pt:2, justifyContent: 'center' }}>
               <Box sx={{flex: '1 1 auto'}} />
-              <Button onClick={handleReset}>Reset</Button>
+              <Button onClick={handleReset}>홈으로</Button>
             </Box>
-          </>
+          </div>
         ): (
-          <>
-            <Typography sx={{mt: 2, mb: 1}}>
-              Step {activeStep + 1}
-            </Typography>
+          <div className="content-box">
+            <div className="content-stepper">
+              <CustomStepper
+                activeStep={activeStep}
+                activeOption={activeOption}
+                onChangeOption={onChangeOption}
+                onChangeEntry={onChangeEntry}
+                entry={entry}
+              />
+            </div>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, justifyContent: 'center' }}>
               <Button
                 color="inherit"
@@ -47,13 +70,13 @@ const Content = ({ handleNext, handleBack, handleReset, activeStep}) => {
                 onClick={handleBack}
                 sx={{mr: 1}}
               >
-                Back
+                뒤로
               </Button>
               <Button onClick={handleNext}>
-                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                {activeStep === steps.length - 1 ? '등록' : '다음'}
               </Button>
             </Box>
-          </>
+          </div>
         )}
       </Box>
     </ContentBlock>

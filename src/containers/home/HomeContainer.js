@@ -1,14 +1,16 @@
 import React from 'react';
-import Header from '../../components/Header';
-import Content from '../../components/Content';
+import Header from '../../components/home/Header';
+import Content from '../../components/home/Content';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeTab, changeStep } from '../../modules/home';
+import { changeTab, changeEntryStep, changeEntryOption, changeEntryDate } from '../../modules/home';
 
 const HomeContainer = () => {
-  const { user, navTab, activeStep } = useSelector(({ auth, home }) => ({
+  const { user, navTab, activeEntryStep, activeEntryOption, entry } = useSelector(({ auth, home }) => ({
     user: auth.currentUser,
     navTab: home.navItem,
-    activeStep: home.activeStep
+    activeEntryStep: home.activeEntryStep,
+    activeEntryOption: home.activeEntryOption,
+    entry: home.entry
   }));
 
   const dispatch = useDispatch();
@@ -16,17 +18,26 @@ const HomeContainer = () => {
   const onChangeTab = (navItem) => {
     dispatch(changeTab(navItem));
   };
+  
+  const onChangeEntryOption = (value) => {
+    dispatch(changeEntryOption(value));
+  }
 
   const handleNext = () => {
-    dispatch(changeStep(activeStep + 1));
+    dispatch(changeEntryStep(activeEntryStep + 1));
   }
 
   const handleBack = () => {
-    dispatch(changeStep(activeStep - 1));
+    dispatch(changeEntryStep(activeEntryStep - 1));
   }
 
   const handleReset = () => {
-    dispatch(changeStep(0));
+    dispatch(changeEntryStep(0));
+  }
+
+  const onChangeEntry = (name, value) => {
+    console.log(value);
+    dispatch(changeEntryDate({name, value}));
   }
 
   return (
@@ -36,7 +47,11 @@ const HomeContainer = () => {
         handleReset={handleReset}
         handleNext={handleNext}
         handleBack={handleBack}
-        activeStep={activeStep}
+        activeStep={activeEntryStep}
+        onChangeOption={onChangeEntryOption}
+        activeOption={activeEntryOption}
+        onChangeEntry={onChangeEntry}
+        entry={entry}
       />
     </div>
   );
