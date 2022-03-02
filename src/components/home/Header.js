@@ -24,6 +24,7 @@ const Wrapper = styled(Responsive)`
     display: flex;
     color: black;
     text-decoration-line: none;
+    font-family: 'Noto Sans Serif KR';
     border: none;
     cursor: pointer;
     align-items: center;
@@ -38,7 +39,7 @@ const Wrapper = styled(Responsive)`
       justify-content: space-between;
       margin-right: 2rem;
       .active {
-        display:inline;
+        display: inline;
         cursor: default;
         color: #1976d2;
       }

@@ -6,7 +6,6 @@ import {
   faCircleInfo,
   faTrashCan,
 } from '@fortawesome/free-solid-svg-icons/index';
-import { faCirclePlus } from '../../../node_modules/@fortawesome/free-solid-svg-icons/index';
 
 const Item = styled.div`
   height: 4rem;
@@ -37,9 +36,19 @@ const UserItem = ({ item, checked, onChange, onDelete }) => {
         {item.userFirstName}
       </span>
       <div className="options">
-        {checked ? null : <FontAwesomeIcon className="icon" icon={faCheck} onClick={() => onChange(item)}/>}
+        {checked ? null : (
+          <FontAwesomeIcon
+            className="icon"
+            icon={faCheck}
+            onClick={() => onChange(item)}
+          />
+        )}
         <FontAwesomeIcon className="icon" icon={faCircleInfo} />
-        <FontAwesomeIcon className="icon" icon={faTrashCan} onClick={()=> onDelete(item.userId)}/>
+        <FontAwesomeIcon
+          className="icon"
+          icon={faTrashCan}
+          onClick={() => onDelete(item.userId)}
+        />
       </div>
     </Item>
   );

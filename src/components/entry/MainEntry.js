@@ -1,8 +1,14 @@
 import React from 'react';
 import Responsive from '../common/Responsive';
 import styled from 'styled-components';
-import { Box, Stepper, Step, StepLabel, Typography, Button } from '@mui/material/index';
-import CashInput from '../entry/CashIn';
+import {
+  Box,
+  Stepper,
+  Step,
+  StepLabel,
+  Typography,
+  Button,
+} from '@mui/material/index';
 import CustomStepper from '../entry/CustomStepper';
 const steps = ['유형 선택', '내용 입력'];
 
@@ -29,7 +35,16 @@ const ContentBlock = styled(Responsive)`
   }
 `;
 
-const Content = ({ handleNext, handleBack, handleReset, activeStep, onChangeOption, activeOption, onChangeEntry, entry }) => {
+const MainEntry = ({
+  handleNext,
+  handleBack,
+  handleReset,
+  activeStep,
+  onChangeOption,
+  activeOption,
+  onChangeEntry,
+  entry,
+}) => {
   return (
     <ContentBlock>
       <Box sx={{ width: '90%' }}>
@@ -44,15 +59,22 @@ const Content = ({ handleNext, handleBack, handleReset, activeStep, onChangeOpti
         </Stepper>
         {activeStep === steps.length ? (
           <div className="content-box">
-            <Typography sx={{mt: 2, mb: 1}}>
+            <Typography sx={{ mt: 2, mb: 1 }}>
               All steps completed - you&apos;re finished
             </Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'row', pt:2, justifyContent: 'center' }}>
-              <Box sx={{flex: '1 1 auto'}} />
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                pt: 2,
+                justifyContent: 'center',
+              }}
+            >
+              <Box sx={{ flex: '1 1 auto' }} />
               <Button onClick={handleReset}>홈으로</Button>
             </Box>
           </div>
-        ): (
+        ) : (
           <div className="content-box">
             <div className="content-stepper">
               <CustomStepper
@@ -63,12 +85,19 @@ const Content = ({ handleNext, handleBack, handleReset, activeStep, onChangeOpti
                 entry={entry}
               />
             </div>
-            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, justifyContent: 'center' }}>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                pt: 2,
+                justifyContent: 'center',
+              }}
+            >
               <Button
                 color="inherit"
-                disabled={activeStep == 0}
+                disabled={activeStep === 0}
                 onClick={handleBack}
-                sx={{mr: 1}}
+                sx={{ mr: 1 }}
               >
                 뒤로
               </Button>
@@ -83,4 +112,4 @@ const Content = ({ handleNext, handleBack, handleReset, activeStep, onChangeOpti
   );
 };
 
-export default Content;
+export default MainEntry;

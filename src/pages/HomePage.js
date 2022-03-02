@@ -1,7 +1,14 @@
 import React from 'react';
-import HomeContainer from '../containers/home/HomeContainer';
+import HeaderContainer from '../containers/home/HeaderContainer';
+import ContentContainer from '../containers/home/ContentContainer';
+
 const HomePage = () => {
-  return <HomeContainer/>;
-}
+  return (
+    <div>
+      <HeaderContainer />
+      <ContentContainer />
+    </div>
+  );
+};
 
 export default HomePage;
