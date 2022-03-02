@@ -4,6 +4,10 @@ import TableContainer from '@mui/material/TableContainer';
 import { TableBody, TableCell, TableHead, TableRow, Table, Paper } from '@mui/material/index';
 import { faArrowUp, faArrowDown} from '@fortawesome/free-solid-svg-icons/index';
 import { FontAwesomeIcon } from '../../../node_modules/@fortawesome/react-fontawesome/index';
+import { IconButton, TablePagination, Toolbar, Tooltip } from '../../../node_modules/@mui/material/index';
+import { faEllipsisV } from '@fortawesome/free-solid-svg-icons/faEllipsisV';
+import SvgIcon from '@mui/material/SvgIcon';
+import PropTypes from 'prop-types';
 
 const TableBlock = styled.div`
   width: 100%;
@@ -11,8 +15,9 @@ const TableBlock = styled.div`
   border-radius: 9px;
   table {
     border-collapse: collapse;
-    thead {
+    th {
       background-color: #f3f6f9;
+      font-weight: 700;
     }
     .plus {
       margin-left: 0.5rem;
@@ -121,12 +126,64 @@ const list = [
     memo: '이어폰'
   }
 ];
+const FontAwesomeSvgIcon = React.forwardRef((props, ref) => {
+  const { icon } = props;
+
+  const {
+    icon: [width, height, , , svgPathData],
+  } = icon;
+
+  return (
+    <SvgIcon ref={ref} viewBox={`0 0 ${width} ${height}`}>
+      {typeof svgPathData === 'string' ? (
+        <path d={svgPathData} />
+      ) : (
+        /**
+         * A multi-path Font Awesome icon seems to imply a duotune icon. The 0th path seems to
+         * be the faded element (referred to as the "secondary" path in the Font Awesome docs)
+         * of a duotone icon. 40% is the default opacity.
+         *
+         * @see https://fontawesome.com/how-to-use/on-the-web/styling/duotone-icons#changing-opacity
+         */
+        svgPathData.map((d, i) => (
+          <path style={{ opacity: i === 0 ? 0.4 : 1 }} d={d} />
+        ))
+      )}
+    </SvgIcon>
+  );
+});
+
+FontAwesomeSvgIcon.propTypes = {
+  icon: PropTypes.any.isRequired,
+};
+
 const DoubleEntryTable = () => {
   return (
     <TableBlock>
+      {/* TODO: 단기부기/복식부기 */}
+      {/* TODO: 눈모양으로 아이콘 변경 */}
+      {/* TODO: 코드 리팩토링 */}
+
       <TableContainer component={Paper}>
+        <Toolbar
+          sx={{
+            pl: { sm: 2 },
+            pr: { xs: 1, sm: 1 },
+            bgcolor: '#f3f6f9',
+            flex: '1 1 100%',
+            justifyContent:'right'
+          }}
+        >
+          <Tooltip title="보기 옵션">
+            <IconButton> 
+              <FontAwesomeSvgIcon icon={faEllipsisV} />
+            </IconButton>
+          </Tooltip>
+        </Toolbar>
         <Table>
           <TableHead>
+            {/* 옵션 */}
+            
             <TableRow>
               {upperColumns.map((column, idx) => (
                 <TableCell
@@ -169,6 +226,12 @@ const DoubleEntryTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      <TablePagination
+        component="div"
+        count={list.length}
+        rowsPerPage={5}
+        page={0}
+      />
     </TableBlock>
   );
 };

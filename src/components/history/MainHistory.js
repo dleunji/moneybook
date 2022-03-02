@@ -6,7 +6,10 @@ import DoubleEntryTable from './DoubleEntryTable';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import { Grid } from '@mui/material/index';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import MonthPicker from '@mui/lab/MonthPicker';
 // TODO: 잔액
 // TODO: 복식부기표
 // TODO: 일간, 주간, 월간, 지정 탭
@@ -51,14 +54,6 @@ function a11yProps(index) {
 const MainHistory = ({history, onChangePeriodTab}) => {
   return (
     <ContentBlock>
-      <div className="balance-box">
-        <h4>지갑 잔액 30,000</h4>
-        <h4>계좌 잔액 20,000</h4>
-        <h4>미납 대금 20,000</h4>
-      </div>
-      <div className="history-style-options">
-        <span>단식/복식</span>
-      </div>
       <Box sx={{ width: '100%' }}>
         <Box sw={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs value={history.periodTab} onChange={onChangePeriodTab}>
@@ -68,6 +63,13 @@ const MainHistory = ({history, onChangePeriodTab}) => {
           </Tabs>
         </Box>
         <TabPanel value={history.periodTab} index={0}>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <Grid item xs={12} md={6}>
+              <MonthPicker
+                date={new Date('2020-01-01T00:00:00.000')}
+              />
+            </Grid>
+          </LocalizationProvider>
           <DoubleEntryTable />
         </TabPanel>
         <TabPanel value={history.periodTab} index={1}>
@@ -77,6 +79,11 @@ const MainHistory = ({history, onChangePeriodTab}) => {
           <DoubleEntryTable />
         </TabPanel>
       </Box>
+      <div className="balance-box">
+        <h4>지갑 잔액 30,000</h4>
+        <h4>계좌 잔액 20,000</h4>
+        <h4>미납 대금 20,000</h4>
+      </div>
     </ContentBlock>
   );
 };
