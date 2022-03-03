@@ -2,7 +2,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import LoggedInContent from '../../components/home/LoggedInContent';
 import LoggedOutContent from '../../components/home/LoggedOutContent';
 import { changeOption, changeStep, changeEntry } from '../../modules/entry';
-import { changePeriodTab } from '../../modules/history';
+import { changePeriodTab, changeDate, changePage, changeRowsPerPage } from '../../modules/history';
+
 const ContentContainer = () => {
   const { user, navTab, activeEntryStep, activeEntryOption, entry, history } =
     useSelector(({ auth, home, entry, history }) => ({
@@ -42,6 +43,20 @@ const ContentContainer = () => {
     dispatch(changePeriodTab(periodTab));
   };
 
+  const onChangeDate = (name, value) => {
+    dispatch(changeDate({name, value}));
+  };
+
+  const onChangePage = (page) => {
+    dispatch(changePage(page));
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    console.log(event.target);
+    dispatch(changeRowsPerPage(parseInt(event.target.value, 10)));
+    dispatch(changePage(0));
+  }
+
   return (
     <div>
       {user === null ? (
@@ -59,6 +74,9 @@ const ContentContainer = () => {
           entry={entry}
           history={history}
           onChangePeriodTab={onChangePeriodTab}
+          onChangeDate={onChangeDate}
+          onChangePage={onChangePage}
+          handleChangeRowsPerPage={handleChangeRowsPerPage}
         />
       )}
     </div>

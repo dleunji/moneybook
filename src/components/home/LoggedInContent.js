@@ -13,7 +13,10 @@ const LoggedInContent = ({
   onChangeEntry,
   entry,
   history,
-  onChangePeriodTab
+  onChangePeriodTab,
+  onChangeDate,
+  onChangePage,
+  handleChangeRowsPerPage
 }) => {
   switch (navTab) {
     case 0:
@@ -21,6 +24,9 @@ const LoggedInContent = ({
       <MainHistory 
         history={history}
         onChangePeriodTab={onChangePeriodTab}
+        onChangeDate={onChangeDate}
+        onChangePage={onChangePage}
+        handleChangeRowsPerPage={handleChangeRowsPerPage}
       />
       );
     case 1:

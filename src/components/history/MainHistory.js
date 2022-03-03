@@ -1,15 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-
+import { LocalizationProvider, DatePicker } from '@mui/lab/index';
 import DoubleEntryTable from './DoubleEntryTable';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import { Grid } from '@mui/material/index';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import MonthPicker from '@mui/lab/MonthPicker';
+import { Grid, TextField } from '@mui/material/index';
 // TODO: 잔액
 // TODO: 복식부기표
 // TODO: 일간, 주간, 월간, 지정 탭
@@ -51,7 +49,7 @@ function a11yProps(index) {
   };
 }
 
-const MainHistory = ({history, onChangePeriodTab}) => {
+const MainHistory = ({history, onChangePeriodTab, onChangeDate, onChangePage, handleChangeRowsPerPage}) => {
   return (
     <ContentBlock>
       <Box sx={{ width: '100%' }}>
@@ -64,19 +62,33 @@ const MainHistory = ({history, onChangePeriodTab}) => {
         </Box>
         <TabPanel value={history.periodTab} index={0}>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <Grid item xs={12} md={6}>
-              <MonthPicker
-                date={new Date('2020-01-01T00:00:00.000')}
-              />
-            </Grid>
+            <DatePicker
+              value={history.perDate}
+              onChange={(newDate) => {
+                onChangeDate('perDate', newDate);
+              }}
+              renderInput={(params) => <TextField {...params} variant="standard" size="small"/>}
+            />
           </LocalizationProvider>
-          <DoubleEntryTable />
+          <DoubleEntryTable
+            history={history}
+            onChangePage={onChangePage}
+            handleChangeRowsPerPage={handleChangeRowsPerPage}
+          />
         </TabPanel>
         <TabPanel value={history.periodTab} index={1}>
-          <DoubleEntryTable />
+          <DoubleEntryTable
+            history={history}
+            onChangePage={onChangePage}
+            handleChangeRowsPerPage={handleChangeRowsPerPage}
+          />
         </TabPanel>
         <TabPanel value={history.periodTab} index={2}>
-          <DoubleEntryTable />
+          <DoubleEntryTable
+            history={history}
+            onChangePage={onChangePage}
+            handleChangeRowsPerPage={handleChangeRowsPerPage}
+          />
         </TabPanel>
       </Box>
       <div className="balance-box">

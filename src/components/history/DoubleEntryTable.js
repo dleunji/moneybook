@@ -157,7 +157,7 @@ FontAwesomeSvgIcon.propTypes = {
   icon: PropTypes.any.isRequired,
 };
 
-const DoubleEntryTable = () => {
+const DoubleEntryTable = ({history, onChangePage, handleChangeRowsPerPage}) => {
   return (
     <TableBlock>
       {/* TODO: 단기부기/복식부기 */}
@@ -229,8 +229,10 @@ const DoubleEntryTable = () => {
       <TablePagination
         component="div"
         count={list.length}
-        rowsPerPage={5}
-        page={0}
+        rowsPerPage={history.rowsPerPage}
+        page={history.page}
+        onPageChange={onChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </TableBlock>
   );
