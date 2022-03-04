@@ -7,8 +7,8 @@ const DELETE_USER = 'auth/DELETE_USER';
 const CREATE_USER = 'auth/CREATE_USER';
 const CHANGE_FIELD = 'auth/CHANGE_FIELD';
 
-export const initialUserList = createAction(INITIALIZE_USER_LIST, users => users);
-export const initialNewUser = createAction(INITIALIZE_NEW_USER);
+export const initializeUserList = createAction(INITIALIZE_USER_LIST, users => users);
+export const initializeNewUser = createAction(INITIALIZE_NEW_USER);
 export const changeUser = createAction(CHANGE_USER, user => user);
 export const deleteUser = createAction(DELETE_USER, userId => userId);
 export const createUser = createAction(CREATE_USER, user => user);
@@ -16,38 +16,38 @@ export const changeField = createAction(CHANGE_FIELD, ({name, value}) => ({name,
 
 const initialState = {
   userList: [
-    {
-      userId: 4,
-      userFirstName: '은지',
-      userLastName: '이',
-      cashBalance: 0,
-      unpaidBalance: 0,
-      accountBalance: 0
-    },
-    {
-      userId: 12,
-      userFirstName: '길동',
-      userLastName: '홍',
-      cashBalance: 0,
-      unpaidBalance: 0,
-      accountBalance: 0
-    },
-    {
-      userId: 23,
-      userFirstName: '우치',
-      userLastName: '전',
-      cashBalance: 0,
-      unpaidBalance: 0,
-      accountBalance: 0
-    },
-    {
-      userId: 44,
-      userFirstName: '사람',
-      userLastName: '눈',
-      cashBalance: 0,
-      unpaidBalance: 0,
-      accountBalance: 0
-    },
+    // {
+    //   userId: 4,
+    //   userFirstName: '은지',
+    //   userLastName: '이',
+    //   cashBalance: 0,
+    //   unpaidBalance: 0,
+    //   accountBalance: 0
+    // },
+    // {
+    //   userId: 12,
+    //   userFirstName: '길동',
+    //   userLastName: '홍',
+    //   cashBalance: 0,
+    //   unpaidBalance: 0,
+    //   accountBalance: 0
+    // },
+    // {
+    //   userId: 23,
+    //   userFirstName: '우치',
+    //   userLastName: '전',
+    //   cashBalance: 0,
+    //   unpaidBalance: 0,
+    //   accountBalance: 0
+    // },
+    // {
+    //   userId: 44,
+    //   userFirstName: '사람',
+    //   userLastName: '눈',
+    //   cashBalance: 0,
+    //   unpaidBalance: 0,
+    //   accountBalance: 0
+    // },
   ],
   currentUser: null,
   newUser: {
@@ -62,6 +62,7 @@ const initialState = {
 };
 const auth = handleActions({
   [INITIALIZE_USER_LIST]:(state, {payload: users}) => ({
+    ...state,
     userList : users
   }),
   [INITIALIZE_NEW_USER]:(state) => ({
